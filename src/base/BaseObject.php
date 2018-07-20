@@ -59,16 +59,15 @@ class BaseObject
      */
     public function __get($name)
     {
-        $name = ucfirst($name);
         $getter = "get{$name}";
         if(method_exists($this, $getter)){
             return $this->$getter;
         }
         $setter = "set{$name}";
         if(method_exists($this, $setter)){
-            throw new InvalidCallException("属性{static::class}". "{$name}是只写的");
+            throw new InvalidCallException("属性". static::class. "::{$name}是只写的");
         }
-        throw new UnknownPropertyException("未知的属性:{static::class}". "{$name}");
+        throw new UnknownPropertyException("未知的属性:".static::class ."::{$name}");
     }
 
     /**
@@ -81,16 +80,15 @@ class BaseObject
      */
     public function __set($name, $value)
     {
-        $name = ucfirst($name);
         $setter = "set{$name}";
         if(method_exists($this, $setter)){
             return $this->$setter($value);
         }
         $getter = "get{$name}";
         if(method_exists($this, $getter)){
-            throw new InvalidCallException("属性{static::class}". "{$name}是只读的");
+            throw new InvalidCallException("属性".static::class ."::{$name}是只读的");
         }
-        throw new UnknownPropertyException("未知的属性:{static::class}". "{$name}");
+        throw new UnknownPropertyException("未知的属性:".static::class ."::{$name}");
     }
 
     /**
@@ -101,7 +99,6 @@ class BaseObject
      */
     public function __isset($name)
     {
-        $name = ucfirst($name);
         $getter = "get{$name}";
         if (method_exists($this, $getter)) {
             return null !== $this->$getter();
@@ -118,7 +115,6 @@ class BaseObject
      */
     public function __unset($name)
     {
-        $name = ucfirst($name);
         $setter = "set{$name}";
         if (method_exists($this, $setter)) {
             return $this->$setter(null);
@@ -126,9 +122,9 @@ class BaseObject
 
         $getter = "get{$name}";
         if(method_exists($this, $getter)){
-            throw new InvalidCallException("unset只读的属性:{static::class}". "{$name}");
+            throw new InvalidCallException("unset只读的属性:". static::class."::{$name}");
         }
-        throw new UnknownPropertyException("未知的属性:{static::class}". "{$name}");
+        throw new UnknownPropertyException("未知的属性:". static::class. "::{$name}");
     }
 
     /**
@@ -151,8 +147,7 @@ class BaseObject
      */
     public function canGetProperty($name, $checkVars = true)
     {
-        $_name = ucfirst($name);
-        return method_exists($this, "get{$_name}") || $checkVars && property_exists($this, $name);
+        return method_exists($this, "get{$name}") || $checkVars && property_exists($this, $name);
     }
 
     /**
@@ -164,8 +159,7 @@ class BaseObject
      */
     public function canSetProperty($name, $checkVars = true)
     {
-        $_name = ucfirst($name);
-        return method_exists($this, "set{$_name}") || $checkVars && property_exists($this, $name);
+        return method_exists($this, "set{$name}") || $checkVars && property_exists($this, $name);
     }
 
     /**
