@@ -19,13 +19,13 @@ class ServiceLocator extends Component
      * 存储组件对象: key是主键名, value是具体组件对象
      * @var array 
      */
-    private $_components = [];
+    protected $_components = [];
 
     /**
      * 存储组件定义: key是主键名, value是创建组件对象所需要的数据
      * @var array
      */
-    private $_definitions = [];
+    protected $_definitions = [];
 
     /**
      * @param string $id 组件名
@@ -87,7 +87,7 @@ class ServiceLocator extends Component
         }
         if(isset($this->_definitions[$id])){
             $definition = $this->_definitions[$id];
-            $this->_components[$id] = Thsoft::createObject($definition);
+            $this->_components[$id] = ;
             return $this->_components[$id];
         }
     }

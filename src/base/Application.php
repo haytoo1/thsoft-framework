@@ -8,6 +8,7 @@
  */
 
 namespace Thsoft\base;
+use app\http\testdi\Car;
 use Swoole\Http\Server;
 use Thsoft;
 
@@ -19,10 +20,19 @@ use Thsoft;
  */
 class Application extends ServiceLocator
 {
+
+    protected $basePath;
+
+    /**
+     * @var Thsoft\di\Container
+     * @author Hong Tu <hayto@foxmail.com>
+     */
+    public static $container;
+
     public $host = null;
     public $port = null;
 
-    public function setServer($server)
+    /*public function setServer($server)
     {
         foreach ($server as $key=>$value){
             $this->$key = $value;
@@ -30,7 +40,8 @@ class Application extends ServiceLocator
     }
     public function getServer()
     {
-    }
+
+    }*/
 
 
 
@@ -40,12 +51,23 @@ class Application extends ServiceLocator
     {
         parent::init();
         Thsoft\Thsoft::$app = $this;
-        Thsoft\Thsoft::$container = new Thsoft\di\Container();
-        Thsoft\Thsoft::$server = new Server($this->host, $this->port);
+        static::$container = new Thsoft\di\Container();
+//        Thsoft\Thsoft::$server = new Server($this->host, $this->port);
     }
 
     public function run()
     {
+        $obj = $this->getCar();
+        var_dump($obj);
 //        Thsoft\Thsoft::$server->start();
+    }
+
+    /**
+     * @return Car object
+     * @author Hong Tu <hayto@foxmail.com>
+     */
+    public function getCar()
+    {
+        return $this->get('car');
     }
 }

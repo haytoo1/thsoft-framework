@@ -7,7 +7,7 @@
  * @author too <hayto@foxmail.com>
  */
 
-namespace Thsoft\di;
+namespace Thsoft\dibak;
 
 
 class Instance

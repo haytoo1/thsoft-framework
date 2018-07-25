@@ -20,20 +20,10 @@ use Thsoft\exceptions\UnknownPropertyException;
 class BaseObject
 {
     /**
-     * 获取类名
-     * @return string
-     * @author Hong Tu <hayto@foxmail.com>
-     */
-    public static function className()
-    {
-        return static::class;
-    }
-
-    /**
      * BaseObject constructor.
      * @param array $config
      */
-    public function __construct(array $config)
+    public function __construct(array $config=[])
     {
         foreach ($config as $_key=>$_value){
             $this->$_key = $_value;

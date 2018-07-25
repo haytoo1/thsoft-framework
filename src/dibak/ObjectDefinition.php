@@ -7,7 +7,7 @@
  * @author too <hayto@foxmail.com>
  */
 
-namespace Thsoft\di;
+namespace Thsoft\dibak;
 
 /**
  * 对象定义类
