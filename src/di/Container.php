@@ -61,4 +61,38 @@ class Container extends BaseObject implements ContainerInterface
     {
         return $this->_singleton->hasKey($id) || $this->_definitions->hasKey($id);
     }
+    
+    
+    
+    public function make(string $className)
+    {
+        // 保存类的依赖(即构造方法参数)
+        $dependencies = [];
+
+        $reflectionObj = new \ReflectionClass($className);
+        $constructor = $reflectionObj->getConstructor();
+        // 有构造方法
+        if(null !== $constructor){
+            // $parameter对象 表示构造方法的每个参数
+            foreach ($constructor->getParameters() as $parameter){
+                // 有默认值的参数
+                if($parameter->isDefaultValueAvailable()){
+                    $dependencies[] = $parameter->getDefaultValue();
+                }else{
+                    /**
+                     * @var \ReflectionClass $class
+                     */
+                    $class = $parameter->getClass();
+                    if(null !== $class){
+                        $dependencies[] = $class->getName();
+                    }else{
+
+                    }
+                }
+            }
+        }
+//        var_dump($dependencies);
+        die;
+    }
+    
 }
