@@ -23,7 +23,7 @@ class Container extends BaseObject implements ContainerInterface
     protected $_singleton = [];
 
     /**
-     * 存储普通对象(或对象定义), key是对象别名,类名, 接口
+     * 存储 对象定义), key是对象别名,类名, 接口
      * @var array
      * @author Hong Tu <hayto@foxmail.com>
      */
@@ -42,8 +42,7 @@ class Container extends BaseObject implements ContainerInterface
         }
         // 定义里没有, 说明是新来的对象
         if(!isset($this->_definitions[$id])){
-            $this->_definitions[$id] = $this->build($id);
-            return $this->_definitions[$id];
+            return $this->build($id);
         }
         
         $definitions = $this->_definitions[$id];
