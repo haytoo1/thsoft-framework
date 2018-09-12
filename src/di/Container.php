@@ -65,7 +65,7 @@ class Container extends BaseObject implements ContainerInterface
     
     public function make(string $className)
     {
-        // 保存类的依赖(即构造方法参数)
+        // 保存类的依赖(即构造方法参数) 
         $dependencies = [];
 
         $reflectionObj = new \ReflectionClass($className);
